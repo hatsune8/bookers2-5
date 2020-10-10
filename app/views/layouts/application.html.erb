@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2-5</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <%= render 'layouts/header' %>
+
+
+    <div class="body">
+
+    <div class="search-form" >
+      <% if user_signed_in? %>
+      <%= form_with(url: search_path, method: :get, local: true) do |f| %>
+        <%= f.text_field 'search[name]' %>
+        <%= f.select 'search[model]', [['User', 1], ['Book', 2]] %>
+        <%= f.select 'search[test]', [['完全一致', 1], ['前方一致', 2], ['後方一致', 3], ['部分一致', 4]] %>
+        <%= f.submit '検索' %>
+      <% end %>
+      <% end %>
+    </div>
+
+    <div class="container">
+      <p id="notice"><%= notice %></p>
+      <%= yield %>
+    </div>
+    </div>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>
